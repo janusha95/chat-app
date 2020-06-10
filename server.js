@@ -10,23 +10,23 @@ app.get('/', (req, res) => {
   
   app.use(express.static('.'))
   io.on('connection', function (socket) {
-	
     // Listen for a "newuser" message
-    socket.on('newuser', (data) => {
+    socket.on('username', function(username) {
+      socket.username = username;
       // Transmit a message to everyone except the sender
-      socket.broadcast.emit('newuser', data)
+      socket.broadcast.emit('newuser', username)
   
       // The same message, sent to all users - try it!
       //io.emit('newuser', data)
       })
        
-      
+      // socket.username = "Ani";
       // Listen for "chatmsg"
       //   io.emit to all user
       socket.on('chatmsg', (data) => {
-          io.emit('chatmsg', data)
+          io.emit('chatmsg',{msg : data.msg, username: socket.username})
       })
-  
+   
   
   })  
 
