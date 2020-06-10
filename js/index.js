@@ -1,7 +1,6 @@
 'use strict'
 
 const socket = io()
-
 // Send a message to say that I've connected
 socket.emit('newuser', {user: 'Grace Hopper'})
 
