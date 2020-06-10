@@ -24,8 +24,20 @@ $msgForm.addEventListener('submit', (event) => {
 	event.currentTarget.txt.value = ''
 })
 
+const time = new Date();
+const formattedTime = time.toLocaleString("en-US", { hour: "numeric", minute: "numeric" });
+console.log(formattedTime);
+
 socket.on('chatmsg', (data) => {
 	const newMsg = document.createElement('li')
 	$msgList.appendChild(newMsg)
-	newMsg.textContent = (  data.username  +  " : "  +  data.msg   )
+	newMsg.textContent = (  data.username  +  " : "  +  data.msg + formattedTime )
 })
+
+// message.bind('keypress', () => {
+// 	socket.emit('typing')
+// })
+
+// socket.on('typing', (data) => {
+// 	newMsg.textContent = ( + data.username  +  "is typing a message..."  )
+// })

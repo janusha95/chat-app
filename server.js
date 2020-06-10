@@ -24,9 +24,12 @@ app.get('/', (req, res) => {
       // Listen for "chatmsg"
       //   io.emit to all user
       socket.on('chatmsg', (data) => {
-          io.emit('chatmsg',{msg : data.msg, username: socket.username})
+          io.emit('chatmsg',{msg : data.msg, username: socket.username , time : data.formattedTime})
       })
-   
+
+      // socket.on('typing', (data) => {
+      //   io.emit('typing', {username: socket.username});
+      // })
   
   })  
 
