@@ -35,9 +35,23 @@ form button {
 	margin: 0; 
 	padding: 0; 
 }
-.msg-box li{
+.talkbubble li{
 	padding: 5px 10px; 
 }
-.msg-box li:nth-child(odd) {
-	background: #eee; 
+.talkbubble li:nth-child(even) {
+	background:  rgb(114, 147, 236);
+	list-style-type: none; 
+	width: auto;
+	height: auto;
+	position: relative;
+	border-radius: 10px;	
 }
+.talkbubble {
+	list-style-type: none; 
+	width:auto;
+	height: auto;
+	background:wheat;
+	position: relative;
+	border-radius: 10px;
+	margin-bottom: 2em;
+  }
