@@ -14,11 +14,13 @@
 		<!-- Form: Input field, send button, 
 				 Messages: ordered list -->
 		<form id="sendMsg">
+			<i id = "stat" class="status"></i>
 			<input type="text" id="txt" placeholder="type your message here...">
 			<button type="submit" >Send</button>
 		</form>
 		<div class = "msg-box">
 			<ol id="messages" class="talkbubble"></ol>
+			
 		</div>
 
 		<script src="/socket.io/socket.io.js"></script>

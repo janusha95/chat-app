@@ -13,23 +13,25 @@ app.get('/', (req, res) => {
     // Listen for a "newuser" message
     socket.on('username', function(username) {
       socket.username = username;
-      // Transmit a message to everyone except the sender
+        // Transmit a message to everyone except the sender
       socket.broadcast.emit('newuser', username)
-  
       // The same message, sent to all users - try it!
       //io.emit('newuser', data)
       })
-       
-      // socket.username = "Ani";
       // Listen for "chatmsg"
       //   io.emit to all user
       socket.on('chatmsg', (data) => {
           io.emit('chatmsg',{msg : data.msg, username: socket.username , time : data.formattedTime})
       })
+      //Someone is typing
 
-      // socket.on('typing', (data) => {
-      //   io.emit('typing', {username: socket.username});
-      // })
-  
+      socket.on('typing', (data) => { 
+        socket.broadcast.emit('notifyTyping', { user: socket.username, message: data.message })
+      })
+
+      //when soemone stops typing
+
+      socket.on('stopTyping', () => { socket.broadcast.emit("notifyStopTyping"); });
+    
   })  
 
