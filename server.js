@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   io.on('connection', function (socket) {
     // Listen for a "newuser" message
     socket.on('username', function(username) {
-      // username = socket.username;
+       socket.username = username;
         // Transmit a message to everyone except the sender
         socket.broadcast.emit('newuser', username)
       // The same message, sent to all users - try it!
@@ -26,7 +26,7 @@ app.get('/', (req, res) => {
       //Someone is typing
 
       socket.on('typing', (data) => { 
-        socket.broadcast.emit('notifyTyping', { user: socket.username, message: data.message })
+        socket.broadcast.emit('notifyTyping', { user: data.username, message: data.message })
       })
 
       //when soemone stops typing
