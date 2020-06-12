@@ -31,7 +31,7 @@ console.log(formattedTime);
 socket.on('newuser', (data) => {
 	const newMsg = document.createElement('li')
 	$msgList.appendChild(newMsg)
-	newMsg.textContent = ( username + " connected sucessfully!!!" )
+	newMsg.textContent = ( username + " , you have connected sucessfully!!!" )
 })
 
 socket.on('chatmsg', (data) => {
