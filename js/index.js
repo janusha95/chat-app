@@ -16,7 +16,7 @@ socket.on('newuser', (username) => console.log(`${username} has connected!`))
 
 const $msgForm = document.getElementById('sendMsg')
 const $msgList = document.getElementById('messages')
-const $stat = document.getElementById('status')
+const $stat = document.getElementById('stat')
 
 $msgForm.addEventListener('submit', (event) => {
 	event.preventDefault()
@@ -44,16 +44,24 @@ socket.on('chatmsg', (data) => {
 	
 	$msgForm.addEventListener('keypress', () =>  {
 	socket.emit('typing', { user: username, message: "is typing..."  })
+	console.log("here" + username)
 	})
 
 	socket.on('notifyTyping', (data)  =>  {
-		// const newMsg = document.createElement('li')
-		// $stat.appendChild(newMsg)
+		const newMsg = document.createElement('i')
+		$stat.appendChild(newMsg)
 		 console.log( username  +  "  "  +  data.message)
-		// newMsg.textContent = ( username  +  "  "  +  data.message)
-		//status.innerText = username + " " + data.message
+	     newMsg.innerHTML = (username  +  "  "  +  data.message)
+		// status.innerText = username + " " + data.message
 	})
 	//stop typing
-	$msgForm.addEventListener("keyup", () =>  {
-	socket.emit("stopTyping", "");
+	$msgForm.addEventListener('keyup', () =>  {
+	socket.emit('stopTyping', "   ");
+	})
+
+	socket.on('notifyStopTyping', (data)  =>  {
+		const newMsg = document.createElement('i')
+		$stat.appendChild(newMsg)
+		 console.log( "stopped typing")
+	     newMsg.textContent = ("           ")
 	})

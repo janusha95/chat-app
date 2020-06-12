@@ -12,9 +12,9 @@ app.get('/', (req, res) => {
   io.on('connection', function (socket) {
     // Listen for a "newuser" message
     socket.on('username', function(username) {
-      socket.username = username;
+      // username = socket.username;
         // Transmit a message to everyone except the sender
-      socket.broadcast.emit('newuser', username)
+        socket.broadcast.emit('newuser', username)
       // The same message, sent to all users - try it!
       //io.emit('newuser', data)
       })
@@ -31,7 +31,9 @@ app.get('/', (req, res) => {
 
       //when soemone stops typing
 
-      socket.on('stopTyping', () => { socket.broadcast.emit("notifyStopTyping"); });
+      socket.on('stopTyping', () => { 
+        socket.broadcast.emit('notifyStopTyping') 
+      });
     
   })  
 
